@@ -2,6 +2,8 @@ import { CommonModule } from "@angular/common";
 import { ChangeDetectionStrategy, Component, NgModule } from "@angular/core";
 import { RouterModule } from "@angular/router";
 import { IonicModule } from "@ionic/angular";
+import { TodoFormComponentModule } from "./ui/todo-form.component";
+import { Todo } from "../shared/interfaces/todo";
 
 @Component({
   selector: 'app-home',
@@ -12,17 +14,24 @@ import { IonicModule } from "@ionic/angular";
       </ion-toolbar>
     </ion-header>
 
-    <ion-content></ion-content>
+    <ion-content>
+      <app-todo-form (todoSubmitted)="createTodo($event)"></app-todo-form>
+    </ion-content>
   `,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class HomeComponent {}
+export class HomeComponent {
+  createTodo(todo: Todo) {
+    console.log(todo);
+  }
+}
 
 @NgModule({
   declarations: [HomeComponent],
   imports: [
     IonicModule,
     CommonModule,
+    TodoFormComponentModule,
     RouterModule.forChild([
       {
         path: '',
