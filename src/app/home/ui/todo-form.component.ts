@@ -22,6 +22,7 @@ import { Todo } from '../../shared/interfaces/todo';
 })
 export class TodoFormComponent {
   @Output() todoSubmitted = new EventEmitter<Todo>();
+
   public todoForm = this.fb.group({
     title: ['', Validators.required],
     description: [''],
@@ -34,6 +35,7 @@ export class TodoFormComponent {
 
     if (this.todoForm.valid && value.title && value.description) {
       const todo: Todo = {
+        id: Date.now().toString(),
         title: value.title,
         description: value.description,
       };
@@ -48,4 +50,4 @@ export class TodoFormComponent {
   exports: [TodoFormComponent],
   imports: [IonicModule, ReactiveFormsModule],
 })
-export class TodoFormComponentModule { }
+export class TodoFormComponentModule {}

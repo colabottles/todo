@@ -19,7 +19,11 @@ import { TodoFormComponentModule } from './ui/todo-form.component';
       <app-todo-form (todoSubmitted)="createTodo($event)"></app-todo-form>
 
       <ion-list>
-        <ion-item *ngFor="let todo of todoService.todos$ | async">
+        <ion-item *ngFor="let todo of todoService.todos$ | async"
+        button
+        routerLink="/>detail/{{ todo.id }}"
+        routerDirection="forward"
+        >
           <ion-label>{{ todo.title }}</ion-label>
         </ion-item>
       </ion-list>
@@ -28,7 +32,7 @@ import { TodoFormComponentModule } from './ui/todo-form.component';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class HomeComponent {
-  constructor(public todoService: TodoService) {}
+  constructor(public todoService: TodoService) { }
 
   createTodo(todo: Todo) {
     this.todoService.addTodo(todo);
