@@ -6,17 +6,24 @@ import { Todo } from '../../shared/interfaces/todo';
 @Component({
   selector: 'app-todo-form',
   template: `
-    <form [formGroup]="todoForm">
-      <ion-label>Title</ion-label>
-      <ion-input
-        type="text"
-        formControlName="title"
-      ></ion-input>
-      <ion-label>Description</ion-label>
-      <ion-input
-        type="text"
-        formControlName="description"
-      ></ion-input>
+    <form [formGroup]="todoForm" (ngSubmit)="handleSubmit()">
+      <ion-card>
+        <ion-card-title>
+          <ion-label>Title</ion-label>
+          <ion-input
+            type="text"
+            formControlName="title"
+          ></ion-input>
+        </ion-card-title>
+        <ion-card-content>
+          <ion-label>Description</ion-label>
+          <ion-input
+          type="text"
+          formControlName="description"
+        ></ion-input>
+          <ion-button expand="full" type="submit">Add a Todo</ion-button>
+        </ion-card-content>
+      </ion-card>
     </form>
   `,
 })
@@ -28,7 +35,7 @@ export class TodoFormComponent {
     description: [''],
   });
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder) { }
 
   handleSubmit() {
     const value = this.todoForm.value;
@@ -50,4 +57,4 @@ export class TodoFormComponent {
   exports: [TodoFormComponent],
   imports: [IonicModule, ReactiveFormsModule],
 })
-export class TodoFormComponentModule {}
+export class TodoFormComponentModule { }
