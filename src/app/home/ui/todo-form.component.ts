@@ -9,7 +9,6 @@ import { Todo } from '../../shared/interfaces/todo';
     <form [formGroup]="todoForm" (ngSubmit)="handleSubmit()">
       <ion-card>
         <ion-card-title>
-          <ion-label>Title</ion-label>
           <ion-input
             type="text"
             formControlName="title"
@@ -17,7 +16,6 @@ import { Todo } from '../../shared/interfaces/todo';
           ></ion-input>
         </ion-card-title>
         <ion-card-content>
-          <ion-label>Description</ion-label>
           <ion-input
           type="text"
           formControlName="description"
