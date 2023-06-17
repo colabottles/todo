@@ -13,6 +13,7 @@ import { Todo } from '../../shared/interfaces/todo';
           <ion-input
             type="text"
             formControlName="title"
+            label="Title"
           ></ion-input>
         </ion-card-title>
         <ion-card-content>
@@ -20,6 +21,7 @@ import { Todo } from '../../shared/interfaces/todo';
           <ion-input
           type="text"
           formControlName="description"
+          label="Description"
         ></ion-input>
           <ion-button expand="full" type="submit">Add a Todo</ion-button>
         </ion-card-content>
