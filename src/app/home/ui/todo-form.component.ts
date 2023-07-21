@@ -6,7 +6,7 @@ import { Todo } from '../../shared/interfaces/todo';
 @Component({
   selector: 'app-todo-form',
   template: `
-    <form [formGroup]="todoForm" (ngSubmit)="handleSubmit()" id="todoForm">
+    <form [formGroup]="todoForm" (ngSubmit)="handleSubmit()" id="todoForm" aria-label="Todo Form">
       <ion-card>
         <ion-card-title>
           <ion-input

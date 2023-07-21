@@ -11,7 +11,9 @@ import { TodoService } from '../shared/data-access/todo.service';
     <ng-container *ngIf="todo$ | async as todo">
       <ion-header>
         <ion-toolbar>
-          <ion-title> {{ todo.title }} </ion-title>
+          <ion-title>
+            <h1> {{ todo.title }} </h1>
+          </ion-title>
           <ion-buttons slot="start">
             <ion-back-button defaultHref="/home"></ion-back-button>
           </ion-buttons>

@@ -11,7 +11,9 @@ import { TodoFormComponentModule } from './ui/todo-form.component';
   template: `
     <ion-header>
       <ion-toolbar color="primary">
-        <ion-title>Todo</ion-title>
+        <ion-title>
+         <h1>Todo</h1>
+        </ion-title>
       </ion-toolbar>
     </ion-header>
 
