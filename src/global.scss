@@ -25,15 +25,23 @@
 @import "@ionic/angular/css/text-transformation.css";
 @import "@ionic/angular/css/flex-utils.css";
 
-:before, :after {
+*,
+*:before,
+*:after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
+
+html {
+  --ion-dynamic-font: var(--ion-default-dynamic-font);
+}
+
 body {
   font-size: 1.2rem;
   line-height: 1.4;
 }
+
 label.input-wrapper {
   font-size: 1.2rem;
 }
