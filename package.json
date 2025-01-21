@@ -34,7 +34,7 @@
     "postcss": "^8.4.41",
     "rxjs": "~7.8.1",
     "tslib": "^2.6.3",
-    "undici": "^6.19.8",
+    "undici": "^6.21.1",
     "zone.js": "~0.14.10"
   },
   "devDependencies": {
