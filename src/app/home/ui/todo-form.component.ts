@@ -1,60 +1,77 @@
-import { Component, EventEmitter, NgModule, Output } from '@angular/core';
-import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { IonicModule } from '@ionic/angular';
+import { Component, EventEmitter, Output } from '@angular/core';
+import { IonCard, IonCardContent, IonButton } from '@ionic/angular/standalone';
 import { Todo } from '../../shared/interfaces/todo';
 
 @Component({
   selector: 'app-todo-form',
+  standalone: true,
+  imports: [IonCard, IonCardContent, IonButton],
   template: `
-    <form [formGroup]="todoForm" (ngSubmit)="handleSubmit()" id="todoForm" aria-label="Todo Form">
-      <ion-card>
-        <ion-card-title>
-          <ion-input
+    <ion-card>
+      <ion-card-content>
+        <div class="input-group">
+          <label for="title">Title</label>
+          <input
+            #titleInput
+            id="title"
             type="text"
-            formControlName="title"
-            label="Title"
-          ></ion-input>
-        </ion-card-title>
-        <ion-card-content>
-          <ion-input
-          type="text"
-          formControlName="description"
-          label="Description"
-        ></ion-input>
-          <ion-button expand="full" type="submit">Add a Todo</ion-button>
-        </ion-card-content>
-      </ion-card>
-    </form>
+            class="native-input"
+            placeholder="Todo title"
+          />
+        </div>
+        <div class="input-group">
+          <label for="description">Description</label>
+          <input
+            #descInput
+            id="description"
+            type="text"
+            class="native-input"
+            placeholder="Description (optional)"
+          />
+        </div>
+        <ion-button expand="full" (click)="handleSubmit(titleInput, descInput)">
+          Add a Todo
+        </ion-button>
+      </ion-card-content>
+    </ion-card>
   `,
+  styles: [`
+    .input-group {
+      margin-bottom: 1rem;
+    }
+    label {
+      display: block;
+      margin-bottom: 0.25rem;
+      font-weight: 500;
+    }
+    .native-input {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid var(--ion-color-medium);
+      border-radius: 4px;
+      font-size: 1rem;
+      box-sizing: border-box;
+      background: transparent;
+      color: inherit;
+    }
+  `],
 })
 export class TodoFormComponent {
   @Output() todoSubmitted = new EventEmitter<Todo>();
 
-  public todoForm = this.fb.group({
-    title: ['', Validators.required],
-    description: [''],
-  });
-
-  constructor(private fb: FormBuilder) { }
-
-  handleSubmit() {
-    const value = this.todoForm.value;
-
-    if (this.todoForm.valid && value.title && value.description) {
+  handleSubmit(titleInput: HTMLInputElement, descInput: HTMLInputElement) {
+    const title = titleInput.value.trim();
+    const description = descInput.value.trim();
+    if (title) {
       const todo: Todo = {
         id: Date.now().toString(),
-        title: value.title,
-        description: value.description,
+        title,
+        description,
+        completed: false,
       };
-
       this.todoSubmitted.emit(todo);
+      titleInput.value = '';
+      descInput.value = '';
     }
   }
 }
-
-@NgModule({
-  declarations: [TodoFormComponent],
-  exports: [TodoFormComponent],
-  imports: [IonicModule, ReactiveFormsModule],
-})
-export class TodoFormComponentModule { }
