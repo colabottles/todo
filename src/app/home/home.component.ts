@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import {
   IonHeader,
@@ -101,8 +101,15 @@ import { TodoFormComponent } from './ui/todo-form.component';
     `,
   ],
 })
-export class HomeComponent {
-  constructor(public todoService: TodoService) {}
+export class HomeComponent implements OnInit {
+  constructor(
+    public todoService: TodoService,
+    private cdr: ChangeDetectorRef
+  ) { }
+
+  ngOnInit() {
+    this.todoService.todos$.subscribe(() => this.cdr.markForCheck());
+  }
 
   createTodo(todo: Todo) {
     this.todoService.addTodo(todo);
